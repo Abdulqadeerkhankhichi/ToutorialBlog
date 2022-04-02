@@ -1,0 +1,249 @@
+﻿@model ToutorialBlog.Models.tblArticle
+<div id="kt_toolbar" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content">
+        <!--begin::Inbox App - Compose -->
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                <!--begin::Card-->
+                <div class="card">
+                    <div class="card-header align-items-center py-5 gap-5">
+                        <!--begin::Actions-->
+                        <div class="d-flex">
+                            <!--begin::Back-->
+                            <a href="#" onclick="View()" class="btn btn-sm btn-icon btn-clear btn-active-light-primary me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Back">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr063.svg-->
+                                <span class="svg-icon svg-icon-1 m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="11" width="13" height="2" rx="1" fill="black" />
+                                        <path d="M8.56569 11.4343L12.75 7.25C13.1642 6.83579 13.1642 6.16421 12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75L5.70711 11.2929C5.31658 11.6834 5.31658 12.3166 5.70711 12.7071L11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25C13.1642 17.8358 13.1642 17.1642 12.75 16.75L8.56569 12.5657C8.25327 12.2533 8.25327 11.7467 8.56569 11.4343Z" fill="black" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </a>
+                            <!--end::Back-->
+
+                            <h2 hidden>@Model.ArticleId</h2>
+                            <!--begin::Delete-->
+                            @*@if (ViewBag.ApproveAccess == true)
+                            {
+                                <a href="#" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_Approved_Article" id="btnApproved" title="Approved">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                    <span class="svg-icon svg-icon-2 m-0">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </a>
+                            }
+                            @if (ViewBag.EditAccess == true)
+                            {
+                                <a href="@Url.Action("Add", "Articles", new { id = Model.ArticleId })" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                    <span class="svg-icon svg-icon-2 m-0">
+                                        <i class="fa fa-pen"></i>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </a>
+                            }
+                            @if (ViewBag.DeleteAccess == true)
+                            {
+                                <a href="#" class="btn btn-sm btn-icon btn-light btn-active-light-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_Delete_Article" id="DeleteArticle" title="Delete">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                    <span class="svg-icon svg-icon-2 m-0">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </a>
+                            }*@
+                            <!--end::Delete-->
+
+                        </div>
+                        <!--end::Actions-->
+                        <!--begin::Pagination-->
+                        <!--end::Pagination-->
+                    </div>
+                    <div class="card-body">
+                        <!--begin::Title-->
+                        <div class="d-flex flex-wrap gap-2 justify-content-between mb-8">
+                            <div class="d-flex align-items-center flex-wrap gap-2">
+                                <!--begin::Heading-->
+                                <h2 class="fw-bold me-3 my-1">@Model.Title</h2>
+                                <!--begin::Heading-->
+                                <!--begin::Badges-->
+                                @if (Model.Tags != null)
+                                {
+                                    string[] Tags = Model.Tags.Split(',');
+                                    foreach (var Tag in Tags)
+                                    {
+                                        <div class="badge badge-light-primary">@Tag</div>
+                                    }
+                                }
+                                
+                                @*<span class="badge badge-light-danger my-1">important</span>*@
+                                <!--end::Badges-->
+                            </div>
+
+                        </div>
+                        <!--end::Title-->
+                        <!--begin::Message accordion-->
+                        <div data-kt-inbox-message="message_wrapper">
+                            <!--begin::Message header-->
+                            <div class="d-flex flex-wrap gap-2 flex-stack cursor-pointer" data-kt-inbox-message="header">
+                                <!--begin::Author-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-50 me-4">
+                                        <span class="symbol-label">@Model.tblUser.Name[0]</span>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <div class="pe-5">
+                                        <!--begin::Author details-->
+                                        <div class="d-flex align-items-center flex-wrap gap-1">
+                                            <a href="#" class="fw-bolder text-dark text-hover-primary">@Model.tblUser.Name</a>
+                                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                            <span class="svg-icon svg-icon-7 svg-icon-success mx-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <circle fill="#000000" cx="12" cy="12" r="8" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            @*<span class="text-muted fw-bolder">1 day ago</span>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--end::Author-->
+                                <!--begin::Actions-->
+                                <div class="d-flex align-items-center flex-wrap gap-2">
+                                    <!--begin::Date-->
+                                    <div class="row" >
+                                        <div style="float:right;">
+                                            <div class="col-12">
+                                                <b>Created:</b>
+                                                <span class="fw-bold text-muted text-end me-3"> @Model.CreatedDate</span> <b>@Model.tblUser1.Name</b>
+                                            </div>
+                                            <div class="col-12">
+                                                <b>Modified:</b>
+                                                <span class="fw-bold text-muted text-end me-3"> @Model.EditDate</span> <b>@Model.tblUser3.Name</b>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--end::Date-->
+
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Message header-->
+                            <!--begin::Message content-->
+                            <div class="collapse fade show" data-kt-inbox-message="message">
+                                <div class="py-5">
+                                    @Html.Raw(@Model.Body)
+                                    @*<p>Hi Bob,</p>
+                                        <p>With resrpect, i must disagree with Mr.Zinsser. We all know the most part of important part of any article is the title.Without a compelleing title, your reader won't even get to the first sentence.After the title, however, the first few sentences of your article are certainly the most important part.</p>
+                                        <p>Jornalists call this critical, introductory section the "Lede," and when bridge properly executed, it's the that carries your reader from an headine try at attention-grabbing to the body of your blog post, if you want to get it right on of these 10 clever ways to omen your next blog posr with a bang</p>
+                                        <p>Best regards,</p>
+                                        <p class="mb-0">Jason Muller</p>*@
+                                </div>
+                            </div>
+                            <!--end::Message content-->
+                        </div>
+                        <!--end::Message accordion-->
+                        <div class="separator my-6"></div>
+
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="kt_modal_Approved_Article" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!--	<div class="modal-header">
+                <h5 class="modal-title">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>-->
+            <div class="modal-body text-center">
+
+                @using (Html.BeginForm("Approved", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {@Html.AntiForgeryToken()
+                <div class="form-content p-2">
+                    <input type="text" id="AArticleId" name="Id" hidden />
+                    <h4 class="modal-title"><i class="fa fa-trash" style="color:red"></i> Approved</h4>
+                    <p class="mb-4">Are you sure want to Approved?</p>
+                    <button type="submit" class="btn btn-success" value="1" name="Value">Approved!</button>
+                    <button type="submit" class="btn btn-primary" value="2" name="Value">UnApproved!</button>
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="kt_modal_Delete_Article" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!--	<div class="modal-header">
+                <h5 class="modal-title">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>-->
+            <div class="modal-body text-center">
+
+
+
+
+                @using (Html.BeginForm("Delete", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {@Html.AntiForgeryToken()
+                <div class="form-content p-2">
+                    <input type="text" id="DArticleId" name="Id" hidden />
+                    <h4 class="modal-title"><i class="fa fa-trash" style="color:red"></i> Delete</h4>
+                    <p class="mb-4">Are you sure want to delete?</p>
+                    <button type="submit" class="btn btn-danger">Yes, delete!</button>
+                    <button type="button" class="btn btn-primary light" data-bs-dismiss="modal">Close</button>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script>
+
+
+    function View(id) {
+        var Search = "@ViewBag.Search";
+        var AnyOne = "@ViewBag.AnyOne";
+        var Tag="@ViewBag.Tags";
+        var url = window.location.origin;
+        url += '/Articles/Search?Search=' + Search + '&&AnyOne=' + AnyOne + '&&Tags=' + Tag+'';
+        window.location.href = url;
+    }
+
+    $("body").on("click", "#DeleteArticle", function () {
+
+        var row = $(this).closest('div');
+        var ArticleId = row.find("h2").text();
+        $("#DArticleId").val(ArticleId);
+    });
+
+    $("body").on("click", "#btnApproved", function () {
+
+        var row = $(this).closest('div');
+        var ArticleId = row.find("h2").text();
+        $("#AArticleId").val(ArticleId);
+    });
+
+    $(document).ready(function () {
+
+        //$(".nav li a").removeClass("active");
+        //$('#Search').addClass('active');
+    });
+
+</script>

@@ -1,0 +1,314 @@
+﻿@model  List<ToutorialBlog.Models.SearchArticle_Result2>
+@using ToutorialBlog.Models;
+@{
+    List<string> Tags1 = (List<string>)ViewBag.TagsState;
+
+    string Search = (string)ViewBag.SearchState;
+    bool AnyOne = (bool)ViewBag.AnyOneState;
+
+    HttpCookie cookieObj = Request.Cookies["Data"];
+    int UserId = Int32.Parse(cookieObj["UserId"]);
+}
+<head>
+    <!-- jQuery library -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">-->
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<div id="kt_toolbar" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content">
+        <!--begin::Inbox App - Messages -->
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                <!--begin::Card-->
+                <div class="card">
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="LinkCopy">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            @ViewBag.Error
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("Search", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {@Html.AntiForgeryToken()
+                    <form>
+                        <div class="card-header py-5 gap-2 gap-md-5" style="height:100px !important">
+                            
+                            <div class="row" style="width:100%">
+                                <div class="align-items-center flex-wrap gap-2 col-6">
+                                    <label class="align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Search</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target priorty" aria-label="Specify a target priorty"></i>
+                                    </label>
+                                    <div class="align-items-center position-relative">
+                                        
+                                        <input type="text" data-kt-inbox-listing-filter="search" class="form-control " value="@Search" name="Search" id="ParaSearch" placeholder="Search " />
+                                    </div>
+                                    
+                                </div>
+                                <div class="flex-column mb-8 fv-row col-3">
+                                    <!--begin::Label-->
+                                    <label class="align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Tags</span>
+                                        <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Specify a target priorty" aria-label="Specify a target priorty"></i>
+                                    </label>
+                                    <select name="Tags" multiple id="langOpt">
+                                        @foreach (var item in ViewBag.Tags)
+                                        {
+                                            if (Tags1.Contains(item))
+                                            {
+                                                <option value="@item" selected>@item</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+
+                                        }
+                                       
+                                    </select>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-primary" style="margin-top:36%;"><i class="fa fa-search"></i></button>
+                                </div>
+                                <div class="col-2">
+                                 
+                                    <div class="" style="float:right">
+                                        <label class="fs-6 fw-bold">Tag Prefrence</label>
+                                    </div>
+                                   
+                                    <label class="form-check form-switch form-check-custom form-check-solid" style="float:right">
+                                        @if (AnyOne == true)
+                                        {
+                                            <input class="form-check-input" type="checkbox" name="AnyOne" value="true" checked>
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="checkbox" name="AnyOne" value="true">
+                                        }
+                                        <span class="form-check-label fw-bold text-muted">Any One</span>
+                                    </label>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+
+                    <!--end::Pagination-->
+
+                    <div class="card-body p-3 row">
+                        <div class="col-12">
+                            <!--begin::Table-->
+                            <table class="table table-hover table-row-dashed fs-6 gy-5 my-0" id="tblMyList">
+                                <!--begin::Table head-->
+                                <thead class="d-none">
+                                    <tr>
+
+                                        <th>Author</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <!--begin::Author-->
+                                        <td class="ps-6 w-150px w-md-175px">
+                                            <a href="#" class="d-flex align-items-center text-dark">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol symbol-35px me-3">
+                                                    <div class="symbol-label bg-light-danger">
+                                                        <span class="text-danger">@item.Name[0]</span>
+                                                    </div>
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Name-->
+                                                <span class="fw-bold">@item.Name</span>
+                                                <!--end::Name-->
+                                            </a>
+                                        </td>
+                                        <!--end::Author-->
+                                        <!--begin::Title-->
+                                        <td>
+                                            <div class="text-dark mb-1">
+                                                <!--begin::Heading-->
+                                                <a href="#" onclick="View(@item.ArticleId)" class="text-dark">
+                                                    <span class="fw-bolder">@item.Title</span>
+                                                    @*<span class="fw-bolder d-none d-md-inine">-</span>
+                <span class="d-none d-md-inine text-muted">@item.Title</span>*@
+                                                </a>
+                                                <!--end::Heading-->
+                                            </div>
+                                            <!--begin::Badges-->
+                                            @if (item.Tags != null)
+                                            {
+                                                string[] Tags = item.Tags.Split(',');
+                                                foreach (var Tag in Tags)
+                                                {
+                                                    <div class="badge badge-light-primary">@Tag</div>
+                                                }
+                                            }
+
+                                           
+                                            @*<div class="badge badge-light-primary">inbox</div>*@
+                                            @*<div class="badge badge-light-warning">task</div>*@
+                                            <!--end::Badges-->
+                                        </td>
+                                        <!--end::Title-->
+                                        <!--begin::Date-->
+                                            @if (item.Status == 0)
+                                            {
+                                            <td>
+                                                <div class="badge badge-light-warning">Pending</div>
+                                            </td>
+                                        }
+                                        else if (item.Status == 1)
+                                        {
+                                            <td>
+                                                <div class="badge badge-light-success">Approved</div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div class="badge badge-light-danger">UnApproved</div>
+                                            </td>
+                                        }
+                                            <td class="w-100px text-end fs-7 pe-9">
+                                                <span class="fw-bold">@item.CreatedDate</span>
+                                            </td>
+                                            <td class="w-100px text-end fs-7 pe-9">
+                                                <div class="d-flex">
+                                                    <h2 hidden id="SArticleId">@item.ArticleId</h2>
+                                                    @if (item.FCheck == 1)
+                                                    {
+                                                        <a href="#" class="fw-bold" id="BFavorite"><i class="fa fa-heart" style="font-size:24px;margin-top:5px;color:red;" id="IBFavorite"></i> </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" class="fw-bold" id="BFavorite"><i class="fa fa-heart" style="font-size:24px;margin-top:5px;" id="IBFavorite"></i> </a>
+                                                    }
+                                                    &nbsp; &nbsp; &nbsp;
+                                                    @if (ViewBag.EditAccess == true)
+                                                    {
+                                                        <a href="@Url.Action("Add", "Articles", new { id = item.ArticleId })" @*target="_blank"*@ class="btn btn-primary shadow btn-sm sharp me-1"><i class="fa fa-pen"></i></a>
+                                                    }
+                                                </div>
+                                            </td>
+                                            <!--end::Date-->
+                                        </tr>
+                                    }
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>       <!--end::Table-->
+        </div>
+    </div>
+    <!--end::Card-->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="~/assets/js/jquery.multiselect.js"></script>
+<script>
+
+    function View(id) {
+        var Search = $("#ParaSearch").val();
+        var AnyOne = $('input[name="AnyOne"]').is(":checked");
+        var Tag="@ViewBag.ParaTag";
+        var url = window.location.origin;
+        url += '/Articles/SearchViewArticles?Id=' + id + '&&Search=' + Search + '&&AnyOne=' + AnyOne + '&&Tags=' + Tag+'';
+        window.location.href = url;
+    }
+
+
+    $(document).ready(function () {
+        $('.alert-dismissible').fadeOut(10000);
+        $('#tblMyList').DataTable({
+            searching: true,
+            "ordering": true,
+
+        });
+        //$('#langOpt').select2();
+
+        //$(".nav li a").removeClass("active");
+        //$('#Search').addClass('active');
+        $('#langOpt').multiselect({
+            columns: 1,
+            placeholder: 'Select Tags',
+            search: true,
+            selectAll: true
+        });
+        $('select[multiple]').multiselect();
+
+
+    });
+
+    $("body").on("click", "#BFavorite", function () {
+        
+        var row = $(this).closest('div');
+        var I = row.find("#IBFavorite");
+        var check = 0;
+        if (I.css("color") == "rgb(161, 165, 183)") {
+            I.css("color", "red");
+            check = 1;
+        }
+        else {
+            I.css("color", "rgb(161, 165, 183)");
+            check = 0;
+        }
+            var ArticleID = row.find("#SArticleId").text();
+            var UserID = @UserId;
+
+           
+
+
+        var model = {
+                Check:check,
+                ArticleId: ArticleID,
+                UserId: UserID,
+            };
+            console.log(model);
+
+            //Send the JSON array to Controller using AJAX.
+
+            $.ajax({
+                type: "POST",
+                url: "/Articles/SetFavorite",
+                data: JSON.stringify(model),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    
+                },
+                failure: function (errMsg) {
+                    location.reload();
+                }
+            });
+
+
+
+
+
+    });
+
+</script>

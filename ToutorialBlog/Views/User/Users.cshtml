@@ -1,0 +1,487 @@
+﻿@model List<ToutorialBlog.Models.tblUser>
+@using ToutorialBlog.Models;
+@{
+    List<tblRole> Roles = (List<tblRole>)ViewBag.Roles;
+}
+
+
+
+
+<div class="modal fade" id="kt_modal_add_user1" role="dialog">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Add User</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+
+
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                <!--begin::Form-->
+                @using (Html.BeginForm("Users", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {@Html.AntiForgeryToken()
+                <form id="kt_modal_add_user_form" class="form" action="#">
+                    <!--begin::Scroll-->
+                    <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-bold fs-6 mb-2">Name</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" hidden name="UserId" id="UserId" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="UserId" value="" />
+                            <input type="text" name="Name" id="Name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Name" value="" required />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-bold fs-6 mb-2">Email</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="email" name="Email" id="Email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="example@domain.com" value="" required />
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-bold fs-6 mb-2">Password</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="password" name="Password" id="Password" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="******" value="" required />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-bold fs-6 mb-5">Role</label>
+                            <!--end::Label-->
+                            <!--begin::Roles-->
+                            <!--begin::Input row-->
+                            <div class="d-flex fv-row">
+                                <!--begin::Radio-->
+                                <div class="form-check form-check-custom form-check-solid" style="width:100%;">
+                                    <!--begin::Input-->
+                                    <select class="form-control" name="RoleId" id="RoleId" >
+                                        @foreach (ToutorialBlog.Models.tblRole item in Roles)
+                                        {
+                                            <option value="@item.RoleId">@item.Role</option>
+
+                                        }
+                                    </select>
+                                    <div class='separator separator-dashed my-5'></div>
+
+                                </div>
+                                <!--end::Radio-->
+                            </div>
+                            <!--end::Input row-->
+
+
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--end::Scroll-->
+                    <!--begin::Actions-->
+                    <div class="text-center pt-15">
+                        <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="AddModalClose">Close</button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+            }
+                <!--end::Form-->
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="toolbar mb-n1 pt-3 mb-lg-n3 pt-lg-6" id="kt_toolbar">
+   
+</div>
+<!--end::Toolbar-->
+<!--begin::Container-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <h2 class="fw-bolder">Users List</h2>
+                </div>
+                <!--begin::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar">
+                    <!--begin::Toolbar-->
+                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                        <!--begin::Filter-->
+                        <!--begin::Add user-->
+                        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#kt_modal_add_user1" id="CreateUserB" style="float:right !important;">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                    <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->Add User
+                        </button>
+                        <!--end::Add user-->
+                    </div>
+                    <div class="modal fade" id="" tabindex="-1" aria-hidden="true">
+                        <!--begin::Modal dialog-->
+                        <div class="modal-dialog modal-dialog-centered">
+                            <!--begin::Modal content-->
+                            <div class="modal-body">
+                                <div aria-labelledby="swal2-title" aria-describedby="swal2-html-container" class="swal2-popup swal2-modal swal2-icon-warning swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: grid;">
+                                    <button type="button" class="swal2-close" aria-label="Close this dialog" style="display: none;">×</button>
+
+                                    <div class="swal2-icon swal2-warning swal2-icon-show" style="display: flex;">
+                                        <div class="swal2-icon-content">!</div>
+                                    </div>
+                                    <div class="swal2-html-container" id="swal2-html-container" style="display: block;">
+                                        Are you sure you want to delete?
+                                    </div>
+
+
+                                    <div>
+                                        @using (Html.BeginForm("Delete", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {@Html.AntiForgeryToken()
+                                        <form>
+                                            @*<input type="text" id="DUserId" name="Id" hidden />*@
+                                            <div class="swal2-loader"></div>
+                                            <button type="submit" class="btn btn-danger" aria-label="" style="display: inline-block;">Yes, delete!</button>
+
+                                            <button type="button" class="swal2-cancel btn fw-bold btn-active-light-primary" aria-label="" style="display: inline-block;">No, cancel</button>
+                                        </form>
+                                    }
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end::Modal content-->
+                        </div>
+                        <!--end::Modal dialog-->
+                    </div>
+
+
+                    <div class="modal fade" id="kt_modal_Delete_user1" aria-hidden="true" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <!--	<div class="modal-header">
+                        <h5 class="modal-title">Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>-->
+                                <div class="modal-body text-center">
+
+
+                                  
+
+                                    @using (Html.BeginForm("Delete", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {@Html.AntiForgeryToken()
+                                    <div class="form-content p-2">
+                                        <input type="text" id="DUserId" name="Id" hidden />
+                                        <h4 class="modal-title"><i class="fa fa-trash" style="color:red"></i> Delete</h4>
+                                        <p class="mb-4">Are you sure want to delete?</p>
+                                        <button type="submit" class="btn btn-danger">Yes, delete!</button>
+                                        <button type="button" class="btn btn-primary light" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end::Modal - Add task-->
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body py-4">
+                <!--begin::Table-->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    @if (ViewBag.Createmessage != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" id="LinkCopy">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+
+                            @ViewBag.Createmessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (ViewBag.Deletemessage != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="LinkCopy">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+
+                            @ViewBag.Deletemessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (ViewBag.updatemessage != null)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="LinkCopy">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            @ViewBag.updatemessage
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="LinkCopy">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            @ViewBag.Error
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    <!--begin::Table head-->
+                    <thead>
+                        <!--begin::Table row-->
+                        <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+                            @*<th class="w-10px pe-2">
+                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                    <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_table_users .form-check-input" value="1" />
+                                </div>
+                            </th>*@
+                            <th hidden class="min-w-125px">UserId</th>
+                            <th class="min-w-125px">User</th>
+                            <th class="min-w-125px" hidden>Role</th>
+                            <th class="min-w-125px">Role</th>
+                            <th class="min-w-125px">Last login</th>
+                            @*<th class="min-w-125px">Joined Date</th>*@
+                            <th class="text-end min-w-100px">Actions</th>
+                        </tr>
+                        <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody class="text-gray-600 fw-bold">
+                        <!--begin::Table row-->
+                        @foreach (ToutorialBlog.Models.tblUser item in Model)
+                        {
+                            <tr>
+                                <!--begin::Checkbox-->
+                                @*<td>
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="checkbox" value="1" />
+                                    </div>
+                                </td>*@
+                                <!--end::Checkbox-->
+                                <!--begin::User=-->
+                                <td hidden>@item.UserId</td>
+                                <td class="d-flex align-items-center">
+                                    <!--begin:: Avatar -->
+                                    @*<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                            <a href="view.html">
+                                                <div class="symbol-label">
+                                                    <img src="../../../assets/media/avatars/300-6.jpg" alt="Emma Smith" class="w-100" />
+                                                </div>
+                                            </a>
+                                        </div>*@
+                                    <!--end::Avatar-->
+                                    <!--begin::User details-->
+                                    <div class="d-flex flex-column">
+                                        <span id="ListName">@item.Name</span>
+                                        <span id="ListEmail">@item.Email</span>
+                                    </div>
+                                    <!--begin::User details-->
+                                </td>
+                                <!--end::User=-->
+                                <!--begin::Role=-->
+                                <td hidden>@item.RoleId</td>
+                                <td>@item.tblRole.Role</td>
+                                <!--end::Role=-->
+                                <!--begin::Last login=-->
+                                @*<td>
+                                        <div class="badge badge-light fw-bolder">@item.CreatedDate</div>
+                                    </td>*@
+                                <!--end::Last login=-->
+                                <!--begin::Two step=-->
+                                <!--end::Two step=-->
+                                <!--begin::Joined-->
+                                <td>@item.CreatedDate</td>
+                                <!--begin::Joined-->
+                                <!--begin::Action=-->
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        Actions
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                        <span class="svg-icon svg-icon-5 m-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </a>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user1" id="EditUserB">Edit</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3" id="DeleteUserB" data-bs-toggle="modal" data-bs-target="#kt_modal_Delete_user1">Delete</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    </div>
+                                    <!--end::Menu-->
+                                </td>
+                                <!--end::Action=-->
+                            </tr>
+                        }
+                        @*<tr>
+                                <!--begin::Checkbox-->
+                                <td>
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="checkbox" value="1" />
+                                    </div>
+                                </td>
+                                <!--end::Checkbox-->
+                                <!--begin::User=-->
+                                <td class="d-flex align-items-center">
+                                    <!--begin:: Avatar -->
+                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                        <a href="view.html">
+                                            <div class="symbol-label">
+                                                <img src="../../../assets/media/avatars/300-6.jpg" alt="Emma Smith" class="w-100" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::User details-->
+                                    <div class="d-flex flex-column">
+                                        <a href="view.html" class="text-gray-800 text-hover-primary mb-1">Emma Smith</a>
+                                        <span>e.smith@kpmg.com.au</span>
+                                    </div>
+                                    <!--begin::User details-->
+                                </td>
+                                <!--end::User=-->
+                                <!--begin::Role=-->
+                                <td>Administrator</td>
+                                <!--end::Role=-->
+                                <!--begin::Last login=-->
+                                <td>
+                                    <div class="badge badge-light fw-bolder">Yesterday</div>
+                                </td>
+                                <!--end::Last login=-->
+                                <!--begin::Two step=-->
+                                <!--end::Two step=-->
+                                <!--begin::Joined-->
+                                <td>10 Nov 2022, 2:40 pm</td>
+                                <!--begin::Joined-->
+                                <!--begin::Action=-->
+                                <td class="text-end">
+                                    <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                        Actions
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                        <span class="svg-icon svg-icon-5 m-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </a>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="view.html" class="menu-link px-3">Edit</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_Delete_user">Delete</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                    </div>
+                                    <!--end::Menu-->
+                                </td>
+                                <!--end::Action=-->
+                            </tr>*@
+
+                    </tbody>
+                    <!--end::Table body-->
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Post-->
+</div>
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script>
+
+    $("body").on("click", "#DeleteUserB", function () {
+
+        var currentRow = $(this).closest("tr");
+        $("#DUserId").val(currentRow.find("td:eq(0)").text());
+
+    });
+
+    $("body").on("click", "#EditUserB", function () {
+
+        var currentRow = $(this).closest("tr");
+        $("#UserId").val(currentRow.find("td:eq(0)").text());
+        $("#Name").val(currentRow.find("#ListName").text());
+        $("#Email").val(currentRow.find("#ListEmail").text());
+        $("#Password").val("");
+        $("#Password").prop('required', false);
+        $("#RoleId").val(currentRow.find("td:eq(2)").text()).change();
+
+    });
+
+    $("body").on("click", "#CreateUserB", function () {
+
+        var currentRow = $(this).closest("tr");
+        $("#UserId").val("");
+        $("#Name").val("");
+        $("#Email").val("");
+        $("#Password").val("");
+        $("#Password").prop('required', true);
+        $("#RoleId").val("1").change();
+
+    });
+
+    $("body").on("click", "#AddModalClose", function () {
+        $('#kt_modal_add_user1').modal('hide');
+    });
+
+
+    $(document).ready(function () {
+        $('.alert-dismissible').fadeOut(10000);
+
+        $('#kt_table_users').DataTable({
+            searching: true,
+            "ordering": true,
+
+        });
+        //$(".nav li a").removeClass("active");
+        //$('#Users').addClass('active');
+    });
+
+</script>

@@ -1,0 +1,1440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ToutorialBlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAccessLevel">
+          <Key>
+            <PropertyRef Name="AccessLevelId" />
+          </Key>
+          <Property Name="AccessLevelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="CreateAccess" Type="bit" />
+          <Property Name="EditAccess" Type="bit" />
+          <Property Name="DeleteAccess" Type="bit" />
+          <Property Name="ApproveAccess" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblArticle">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Author" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="UnApprovedDate" Type="datetime" />
+          <Property Name="UnApprovedBy" Type="int" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblFavoriteList">
+          <Key>
+            <PropertyRef Name="FavoriteListId" />
+          </Key>
+          <Property Name="FavoriteListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblHistory">
+          <Key>
+            <PropertyRef Name="HistoryId" />
+          </Key>
+          <Property Name="HistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Search" Type="nvarchar(max)" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="Toggle" Type="bit" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblMenu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="ControllerName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="255" />
+          <Property Name="isParent" Type="bit" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="FontAwesome" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="ElementId" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblTag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag" Type="nvarchar(max)" />
+          <Property Name="ArticleId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditBy" Type="int" />
+          <Property Name="EditDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__tblAccess__Creat__398D8EEE">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__Delet__3B75D760">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__EditB__3A81B327">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__MenuI__37A5467C">
+          <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="0..1" />
+          <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMenu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__RoleI__38996AB5">
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="0..1" />
+          <End Role="tblAccessLevel" Type="Self.tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__Autho__4F7CD00D">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__Creat__5070F446">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__Delet__52593CB8">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__EditB__5165187F">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__Created__32E0915F">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__Deleted__34C8D9D1">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__EditBy__33D4B598">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRole__Created__2D27B809">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRole__Deleted__2F10007B">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRole__EditBy__2E1BDC42">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__Created__276EDEB3">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__Deleted__29572725">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__EditBy__286302EC">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__RoleId__267ABA7A">
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblArticle_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="UnApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblArticle_tblUser1">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFavoriteList_tblArticle">
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="0..1" />
+          <End Role="tblFavoriteList" Type="Self.tblFavoriteList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblFavoriteList">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFavoriteList_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblFavoriteList" Type="Self.tblFavoriteList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblFavoriteList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHistory_tblArticle">
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="0..1" />
+          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblHistory">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHistory_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblHistory" Type="Self.tblHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTag_tblArticle">
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="0..1" />
+          <End Role="tblTag" Type="Self.tblTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblTag">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SearchArticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchValue" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Check" Type="bit" Mode="In" />
+          <Parameter Name="ID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="ToutorialBlogModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAccessLevel" EntityType="Self.tblAccessLevel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblArticle" EntityType="Self.tblArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFavoriteList" EntityType="Self.tblFavoriteList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHistory" EntityType="Self.tblHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMenu" EntityType="Self.tblMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTag" EntityType="Self.tblTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblAccess__Creat__398D8EEE" Association="Self.FK__tblAccess__Creat__398D8EEE">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__Delet__3B75D760" Association="Self.FK__tblAccess__Delet__3B75D760">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__EditB__3A81B327" Association="Self.FK__tblAccess__EditB__3A81B327">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__MenuI__37A5467C" Association="Self.FK__tblAccess__MenuI__37A5467C">
+            <End Role="tblMenu" EntitySet="tblMenu" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__RoleI__38996AB5" Association="Self.FK__tblAccess__RoleI__38996AB5">
+            <End Role="tblRole" EntitySet="tblRole" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__Autho__4F7CD00D" Association="Self.FK__tblArticl__Autho__4F7CD00D">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__Creat__5070F446" Association="Self.FK__tblArticl__Creat__5070F446">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__Delet__52593CB8" Association="Self.FK__tblArticl__Delet__52593CB8">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__EditB__5165187F" Association="Self.FK__tblArticl__EditB__5165187F">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__Created__32E0915F" Association="Self.FK__tblMenu__Created__32E0915F">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblMenu" EntitySet="tblMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__Deleted__34C8D9D1" Association="Self.FK__tblMenu__Deleted__34C8D9D1">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblMenu" EntitySet="tblMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__EditBy__33D4B598" Association="Self.FK__tblMenu__EditBy__33D4B598">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblMenu" EntitySet="tblMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRole__Created__2D27B809" Association="Self.FK__tblRole__Created__2D27B809">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRole" EntitySet="tblRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRole__Deleted__2F10007B" Association="Self.FK__tblRole__Deleted__2F10007B">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRole" EntitySet="tblRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRole__EditBy__2E1BDC42" Association="Self.FK__tblRole__EditBy__2E1BDC42">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRole" EntitySet="tblRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__Created__276EDEB3" Association="Self.FK__tblUser__Created__276EDEB3">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblUser1" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__Deleted__29572725" Association="Self.FK__tblUser__Deleted__29572725">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblUser1" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__EditBy__286302EC" Association="Self.FK__tblUser__EditBy__286302EC">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblUser1" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__RoleId__267ABA7A" Association="Self.FK__tblUser__RoleId__267ABA7A">
+            <End Role="tblRole" EntitySet="tblRole" />
+            <End Role="tblUser" EntitySet="tblUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblArticle_tblUser" Association="Self.FK_tblArticle_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblArticle_tblUser1" Association="Self.FK_tblArticle_tblUser1">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFavoriteList_tblArticle" Association="Self.FK_tblFavoriteList_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticle" />
+            <End Role="tblFavoriteList" EntitySet="tblFavoriteList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFavoriteList_tblUser" Association="Self.FK_tblFavoriteList_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblFavoriteList" EntitySet="tblFavoriteList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHistory_tblArticle" Association="Self.FK_tblHistory_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticle" />
+            <End Role="tblHistory" EntitySet="tblHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHistory_tblUser" Association="Self.FK_tblHistory_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblHistory" EntitySet="tblHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTag_tblArticle" Association="Self.FK_tblTag_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticle" />
+            <End Role="tblTag" EntitySet="tblTag" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ToutorialBlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRole__Created__2D27B809" FromRole="tblRole" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblRole__Deleted__2F10007B" FromRole="tblRole" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser2" Relationship="Self.FK__tblRole__EditBy__2E1BDC42" FromRole="tblRole" ToRole="tblUser" />
+          <NavigationProperty Name="tblUsers" Relationship="Self.FK__tblUser__RoleId__267ABA7A" FromRole="tblRole" ToRole="tblUser" />
+          <NavigationProperty Name="tblAccessLevels" Relationship="ToutorialBlogModel.FK__tblAccess__RoleI__38996AB5" FromRole="tblRole" ToRole="tblAccessLevel" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblRoles" Relationship="Self.FK__tblRole__Created__2D27B809" FromRole="tblUser" ToRole="tblRole" />
+          <NavigationProperty Name="tblRoles1" Relationship="Self.FK__tblRole__Deleted__2F10007B" FromRole="tblUser" ToRole="tblRole" />
+          <NavigationProperty Name="tblRoles2" Relationship="Self.FK__tblRole__EditBy__2E1BDC42" FromRole="tblUser" ToRole="tblRole" />
+          <NavigationProperty Name="tblRole" Relationship="Self.FK__tblUser__RoleId__267ABA7A" FromRole="tblUser" ToRole="tblRole" />
+          <NavigationProperty Name="tblUser1" Relationship="Self.FK__tblUser__Created__276EDEB3" FromRole="tblUser" ToRole="tblUser1" />
+          <NavigationProperty Name="tblUser2" Relationship="Self.FK__tblUser__Created__276EDEB3" FromRole="tblUser1" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser11" Relationship="Self.FK__tblUser__Deleted__29572725" FromRole="tblUser" ToRole="tblUser1" />
+          <NavigationProperty Name="tblUser3" Relationship="Self.FK__tblUser__Deleted__29572725" FromRole="tblUser1" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser12" Relationship="Self.FK__tblUser__EditBy__286302EC" FromRole="tblUser" ToRole="tblUser1" />
+          <NavigationProperty Name="tblUser4" Relationship="Self.FK__tblUser__EditBy__286302EC" FromRole="tblUser1" ToRole="tblUser" />
+          <NavigationProperty Name="tblAccessLevels" Relationship="ToutorialBlogModel.FK__tblAccess__Creat__398D8EEE" FromRole="tblUser" ToRole="tblAccessLevel" />
+          <NavigationProperty Name="tblAccessLevels1" Relationship="ToutorialBlogModel.FK__tblAccess__Delet__3B75D760" FromRole="tblUser" ToRole="tblAccessLevel" />
+          <NavigationProperty Name="tblAccessLevels2" Relationship="ToutorialBlogModel.FK__tblAccess__EditB__3A81B327" FromRole="tblUser" ToRole="tblAccessLevel" />
+          <NavigationProperty Name="tblMenus" Relationship="ToutorialBlogModel.FK__tblMenu__Created__32E0915F" FromRole="tblUser" ToRole="tblMenu" />
+          <NavigationProperty Name="tblMenus1" Relationship="ToutorialBlogModel.FK__tblMenu__Deleted__34C8D9D1" FromRole="tblUser" ToRole="tblMenu" />
+          <NavigationProperty Name="tblMenus2" Relationship="ToutorialBlogModel.FK__tblMenu__EditBy__33D4B598" FromRole="tblUser" ToRole="tblMenu" />
+          <NavigationProperty Name="tblArticles" Relationship="ToutorialBlogModel.FK__tblArticl__Autho__4F7CD00D" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles1" Relationship="ToutorialBlogModel.FK__tblArticl__Creat__5070F446" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles2" Relationship="ToutorialBlogModel.FK__tblArticl__Delet__52593CB8" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles3" Relationship="ToutorialBlogModel.FK__tblArticl__EditB__5165187F" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles4" Relationship="ToutorialBlogModel.FK_tblArticle_tblUser" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles5" Relationship="ToutorialBlogModel.FK_tblArticle_tblUser1" FromRole="tblUser" ToRole="tblArticle" />
+          <NavigationProperty Name="tblFavoriteLists" Relationship="ToutorialBlogModel.FK_tblFavoriteList_tblUser" FromRole="tblUser" ToRole="tblFavoriteList" />
+          <NavigationProperty Name="tblHistories" Relationship="ToutorialBlogModel.FK_tblHistory_tblUser" FromRole="tblUser" ToRole="tblHistory" />
+        </EntityType>
+        <Association Name="FK__tblRole__Created__2D27B809">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRole__Deleted__2F10007B">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRole__EditBy__2E1BDC42">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRole">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__RoleId__267ABA7A">
+          <End Role="tblRole" Type="Self.tblRole" Multiplicity="0..1" />
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__Created__276EDEB3">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__Deleted__29572725">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblUser__EditBy__286302EC">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+          <End Role="tblUser1" Type="Self.tblUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblUser1">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ToutorialBlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblRoles" EntityType="Self.tblRole" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK__tblRole__Created__2D27B809" Association="Self.FK__tblRole__Created__2D27B809">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRole" EntitySet="tblRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRole__Deleted__2F10007B" Association="Self.FK__tblRole__Deleted__2F10007B">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRole" EntitySet="tblRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRole__EditBy__2E1BDC42" Association="Self.FK__tblRole__EditBy__2E1BDC42">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRole" EntitySet="tblRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__RoleId__267ABA7A" Association="Self.FK__tblUser__RoleId__267ABA7A">
+            <End Role="tblRole" EntitySet="tblRoles" />
+            <End Role="tblUser" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__Created__276EDEB3" Association="Self.FK__tblUser__Created__276EDEB3">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblUser1" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__Deleted__29572725" Association="Self.FK__tblUser__Deleted__29572725">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblUser1" EntitySet="tblUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblUser__EditBy__286302EC" Association="Self.FK__tblUser__EditBy__286302EC">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblUser1" EntitySet="tblUsers" />
+          </AssociationSet>
+          <EntitySet Name="tblAccessLevels" EntityType="ToutorialBlogModel.tblAccessLevel" />
+          <EntitySet Name="tblMenus" EntityType="ToutorialBlogModel.tblMenu" />
+          <AssociationSet Name="FK__tblAccess__Creat__398D8EEE" Association="ToutorialBlogModel.FK__tblAccess__Creat__398D8EEE">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__Delet__3B75D760" Association="ToutorialBlogModel.FK__tblAccess__Delet__3B75D760">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__EditB__3A81B327" Association="ToutorialBlogModel.FK__tblAccess__EditB__3A81B327">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__MenuI__37A5467C" Association="ToutorialBlogModel.FK__tblAccess__MenuI__37A5467C">
+            <End Role="tblMenu" EntitySet="tblMenus" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAccess__RoleI__38996AB5" Association="ToutorialBlogModel.FK__tblAccess__RoleI__38996AB5">
+            <End Role="tblRole" EntitySet="tblRoles" />
+            <End Role="tblAccessLevel" EntitySet="tblAccessLevels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__Created__32E0915F" Association="ToutorialBlogModel.FK__tblMenu__Created__32E0915F">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblMenu" EntitySet="tblMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__Deleted__34C8D9D1" Association="ToutorialBlogModel.FK__tblMenu__Deleted__34C8D9D1">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblMenu" EntitySet="tblMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__EditBy__33D4B598" Association="ToutorialBlogModel.FK__tblMenu__EditBy__33D4B598">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblMenu" EntitySet="tblMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMenu__ParentI__31EC6D26" Association="ToutorialBlogModel.FK__tblMenu__ParentI__31EC6D26">
+            <End Role="tblMenu" EntitySet="tblMenus" />
+            <End Role="tblMenu1" EntitySet="tblMenus" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ToutorialBlogModel.sysdiagram" />
+          <EntitySet Name="tblArticles" EntityType="ToutorialBlogModel.tblArticle" />
+          <AssociationSet Name="FK__tblArticl__Autho__4F7CD00D" Association="ToutorialBlogModel.FK__tblArticl__Autho__4F7CD00D">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__Creat__5070F446" Association="ToutorialBlogModel.FK__tblArticl__Creat__5070F446">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__Delet__52593CB8" Association="ToutorialBlogModel.FK__tblArticl__Delet__52593CB8">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblArticl__EditB__5165187F" Association="ToutorialBlogModel.FK__tblArticl__EditB__5165187F">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <EntitySet Name="tblTags" EntityType="ToutorialBlogModel.tblTag" />
+          <AssociationSet Name="FK_tblArticle_tblUser" Association="ToutorialBlogModel.FK_tblArticle_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblArticle_tblUser1" Association="ToutorialBlogModel.FK_tblArticle_tblUser1">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTag_tblArticle" Association="ToutorialBlogModel.FK_tblTag_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticles" />
+            <End Role="tblTag" EntitySet="tblTags" />
+          </AssociationSet>
+          <EntitySet Name="tblFavoriteLists" EntityType="ToutorialBlogModel.tblFavoriteList" />
+          <AssociationSet Name="FK_tblFavoriteList_tblArticle" Association="ToutorialBlogModel.FK_tblFavoriteList_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticles" />
+            <End Role="tblFavoriteList" EntitySet="tblFavoriteLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFavoriteList_tblUser" Association="ToutorialBlogModel.FK_tblFavoriteList_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblFavoriteList" EntitySet="tblFavoriteLists" />
+          </AssociationSet>
+          <FunctionImport Name="SearchArticle" ReturnType="Collection(ToutorialBlogModel.SearchArticle_Result2)">
+            <Parameter Name="SearchValue" Mode="In" Type="String" />
+            <Parameter Name="Check" Mode="In" Type="Boolean" />
+            <Parameter Name="ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblHistories" EntityType="ToutorialBlogModel.tblHistory" />
+          <AssociationSet Name="FK_tblHistory_tblArticle" Association="ToutorialBlogModel.FK_tblHistory_tblArticle">
+            <End Role="tblArticle" EntitySet="tblArticles" />
+            <End Role="tblHistory" EntitySet="tblHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblHistory_tblUser" Association="ToutorialBlogModel.FK_tblHistory_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblHistory" EntitySet="tblHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblAccessLevel">
+          <Key>
+            <PropertyRef Name="AccessLevelId" />
+          </Key>
+          <Property Name="AccessLevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="CreateAccess" Type="Boolean" />
+          <Property Name="EditAccess" Type="Boolean" />
+          <Property Name="DeleteAccess" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblUser" Relationship="ToutorialBlogModel.FK__tblAccess__Creat__398D8EEE" FromRole="tblAccessLevel" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="ToutorialBlogModel.FK__tblAccess__Delet__3B75D760" FromRole="tblAccessLevel" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser2" Relationship="ToutorialBlogModel.FK__tblAccess__EditB__3A81B327" FromRole="tblAccessLevel" ToRole="tblUser" />
+          <NavigationProperty Name="tblMenu" Relationship="ToutorialBlogModel.FK__tblAccess__MenuI__37A5467C" FromRole="tblAccessLevel" ToRole="tblMenu" />
+          <NavigationProperty Name="tblRole" Relationship="ToutorialBlogModel.FK__tblAccess__RoleI__38996AB5" FromRole="tblAccessLevel" ToRole="tblRole" />
+          <Property Name="ApproveAccess" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tblMenu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ControllerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ActionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isParent" Type="Boolean" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="FontAwesome" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="ElementId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblAccessLevels" Relationship="ToutorialBlogModel.FK__tblAccess__MenuI__37A5467C" FromRole="tblMenu" ToRole="tblAccessLevel" />
+          <NavigationProperty Name="tblUser" Relationship="ToutorialBlogModel.FK__tblMenu__Created__32E0915F" FromRole="tblMenu" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="ToutorialBlogModel.FK__tblMenu__Deleted__34C8D9D1" FromRole="tblMenu" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser2" Relationship="ToutorialBlogModel.FK__tblMenu__EditBy__33D4B598" FromRole="tblMenu" ToRole="tblUser" />
+          <NavigationProperty Name="tblMenu1" Relationship="ToutorialBlogModel.FK__tblMenu__ParentI__31EC6D26" FromRole="tblMenu" ToRole="tblMenu1" />
+          <NavigationProperty Name="tblMenu2" Relationship="ToutorialBlogModel.FK__tblMenu__ParentI__31EC6D26" FromRole="tblMenu1" ToRole="tblMenu" />
+        </EntityType>
+        <Association Name="FK__tblAccess__Creat__398D8EEE">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblAccessLevel" Role="tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__Delet__3B75D760">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblAccessLevel" Role="tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__EditB__3A81B327">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblAccessLevel" Role="tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__MenuI__37A5467C">
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblAccessLevel" Role="tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMenu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAccess__RoleI__38996AB5">
+          <End Type="ToutorialBlogModel.tblRole" Role="tblRole" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblAccessLevel" Role="tblAccessLevel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="tblAccessLevel">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__Created__32E0915F">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__Deleted__34C8D9D1">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__EditBy__33D4B598">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblMenu">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMenu__ParentI__31EC6D26">
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblMenu" Role="tblMenu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMenu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="tblMenu1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblArticle">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Author" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditBy" Type="Int32" />
+          <Property Name="EditDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="tblUser" Relationship="ToutorialBlogModel.FK__tblArticl__Autho__4F7CD00D" FromRole="tblArticle" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser1" Relationship="ToutorialBlogModel.FK__tblArticl__Creat__5070F446" FromRole="tblArticle" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser2" Relationship="ToutorialBlogModel.FK__tblArticl__Delet__52593CB8" FromRole="tblArticle" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser3" Relationship="ToutorialBlogModel.FK__tblArticl__EditB__5165187F" FromRole="tblArticle" ToRole="tblUser" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="UnApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="UnApprovedBy" Type="Int32" />
+          <NavigationProperty Name="tblUser4" Relationship="ToutorialBlogModel.FK_tblArticle_tblUser" FromRole="tblArticle" ToRole="tblUser" />
+          <NavigationProperty Name="tblUser5" Relationship="ToutorialBlogModel.FK_tblArticle_tblUser1" FromRole="tblArticle" ToRole="tblUser" />
+          <NavigationProperty Name="tblTags" Relationship="ToutorialBlogModel.FK_tblTag_tblArticle" FromRole="tblArticle" ToRole="tblTag" />
+          <NavigationProperty Name="tblFavoriteLists" Relationship="ToutorialBlogModel.FK_tblFavoriteList_tblArticle" FromRole="tblArticle" ToRole="tblFavoriteList" />
+          <NavigationProperty Name="tblHistories" Relationship="ToutorialBlogModel.FK_tblHistory_tblArticle" FromRole="tblArticle" ToRole="tblHistory" />
+        </EntityType>
+        <Association Name="FK__tblArticl__Autho__4F7CD00D">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="Author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__Creat__5070F446">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__Delet__52593CB8">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="DeletedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblArticl__EditB__5165187F">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="EditBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblTag">
+          <Key>
+            <PropertyRef Name="TagId" />
+          </Key>
+          <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArticleId" Type="Int32" />
+          <NavigationProperty Name="tblArticle" Relationship="ToutorialBlogModel.FK_tblTag_tblArticle" FromRole="tblTag" ToRole="tblArticle" />
+        </EntityType>
+        <Association Name="FK_tblArticle_tblUser">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="UnApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblArticle_tblUser1">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SearchArticle_Result">
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="Int32" Name="Author" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Body" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ApprovedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UnApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UnApprovedBy" Nullable="true" />
+          <Property Type="String" Name="Tags" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="true" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SearchArticle_Result1">
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="Int32" Name="Author" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Body" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ApprovedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UnApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UnApprovedBy" Nullable="true" />
+          <Property Type="String" Name="Tags" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="true" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <Association Name="FK_tblTag_tblArticle">
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblTag" Role="tblTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblTag">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblFavoriteList">
+          <Key>
+            <PropertyRef Name="FavoriteListId" />
+          </Key>
+          <Property Name="FavoriteListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="tblArticle" Relationship="ToutorialBlogModel.FK_tblFavoriteList_tblArticle" FromRole="tblFavoriteList" ToRole="tblArticle" />
+          <NavigationProperty Name="tblUser" Relationship="ToutorialBlogModel.FK_tblFavoriteList_tblUser" FromRole="tblFavoriteList" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblFavoriteList_tblArticle">
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblFavoriteList" Role="tblFavoriteList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblFavoriteList">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFavoriteList_tblUser">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblFavoriteList" Role="tblFavoriteList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblFavoriteList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SearchArticle_Result2">
+          <Property Type="Int32" Name="FCheck" Nullable="false" />
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="Int32" Name="Author" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Body" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ApprovedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UnApprovedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UnApprovedBy" Nullable="true" />
+          <Property Type="String" Name="Tags" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="EditBy" Nullable="true" />
+          <Property Type="DateTime" Name="EditDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="DeletedBy" Nullable="true" />
+          <Property Type="Boolean" Name="isActive" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <EntityType Name="tblHistory">
+          <Key>
+            <PropertyRef Name="HistoryId" />
+          </Key>
+          <Property Name="HistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Search" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Toggle" Type="Boolean" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblArticle" Relationship="ToutorialBlogModel.FK_tblHistory_tblArticle" FromRole="tblHistory" ToRole="tblArticle" />
+          <NavigationProperty Name="tblUser" Relationship="ToutorialBlogModel.FK_tblHistory_tblUser" FromRole="tblHistory" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblHistory_tblArticle">
+          <End Type="ToutorialBlogModel.tblArticle" Role="tblArticle" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblHistory" Role="tblHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblArticle">
+              <PropertyRef Name="ArticleId" />
+            </Principal>
+            <Dependent Role="tblHistory">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblHistory_tblUser">
+          <End Type="ToutorialBlogModel.tblUser" Role="tblUser" Multiplicity="0..1" />
+          <End Type="ToutorialBlogModel.tblHistory" Role="tblHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ToutorialBlogModelStoreContainer" CdmEntityContainer="ToutorialBlogEntities">
+          <EntitySetMapping Name="tblRoles">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblRole">
+              <MappingFragment StoreEntitySet="tblRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAccessLevels">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblAccessLevel">
+              <MappingFragment StoreEntitySet="tblAccessLevel">
+                <ScalarProperty Name="ApproveAccess" ColumnName="ApproveAccess" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeleteAccess" ColumnName="DeleteAccess" />
+                <ScalarProperty Name="EditAccess" ColumnName="EditAccess" />
+                <ScalarProperty Name="CreateAccess" ColumnName="CreateAccess" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="AccessLevelId" ColumnName="AccessLevelId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMenus">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblMenu">
+              <MappingFragment StoreEntitySet="tblMenu">
+                <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="FontAwesome" ColumnName="FontAwesome" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="isParent" ColumnName="isParent" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblArticles">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblArticle">
+              <MappingFragment StoreEntitySet="tblArticle">
+                <ScalarProperty Name="UnApprovedBy" ColumnName="UnApprovedBy" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="UnApprovedDate" ColumnName="UnApprovedDate" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTags">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblTag">
+              <MappingFragment StoreEntitySet="tblTag">
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFavoriteLists">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblFavoriteList">
+              <MappingFragment StoreEntitySet="tblFavoriteList">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="FavoriteListId" ColumnName="FavoriteListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchArticle" FunctionName="ToutorialBlogModel.Store.SearchArticle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ToutorialBlogModel.SearchArticle_Result2">
+                <ScalarProperty Name="FCheck" ColumnName="FCheck" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="UnApprovedDate" ColumnName="UnApprovedDate" />
+                <ScalarProperty Name="UnApprovedBy" ColumnName="UnApprovedBy" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditBy" ColumnName="EditBy" />
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblHistories">
+            <EntityTypeMapping TypeName="ToutorialBlogModel.tblHistory">
+              <MappingFragment StoreEntitySet="tblHistory">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Toggle" ColumnName="Toggle" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Search" ColumnName="Search" />
+                <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

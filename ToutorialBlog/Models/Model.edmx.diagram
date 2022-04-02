@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="44573b6ea0774f09b9eda5a69dd2a613" Name="Diagram1">
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblRole" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblUser" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblRole__Created__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblRole__Deleted__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblRole__EditBy__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblUser__RoleId__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblUser__Created__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblUser__Deleted__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblUser__EditBy__286302EC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblAccessLevel" Width="1.5" PointX="7.5" PointY="2.125" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblMenu" Width="1.5" PointX="5.25" PointY="1.75" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblAccess__Creat__398D8EEE" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblAccess__Delet__3B75D760" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblAccess__EditB__3A81B327" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblAccess__MenuI__37A5467C" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblAccess__RoleI__38996AB5" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblMenu__Created__32E0915F" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblMenu__Deleted__34C8D9D1" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblMenu__EditBy__33D4B598" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblMenu__ParentI__31EC6D26" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.sysdiagram" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblArticle" Width="1.5" PointX="5.25" PointY="7.625" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblArticl__Autho__4F7CD00D" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblArticl__Creat__5070F446" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblArticl__Delet__52593CB8" />
+        <AssociationConnector Association="ToutorialBlogModel.FK__tblArticl__EditB__5165187F" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblTag" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblArticle_tblUser" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblArticle_tblUser1" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblTag_tblArticle" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblFavoriteList" Width="1.5" PointX="9.375" PointY="7.75" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblFavoriteList_tblArticle" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblFavoriteList_tblUser" />
+        <EntityTypeShape EntityType="ToutorialBlogModel.tblHistory" Width="1.5" PointX="10.375" PointY="0.75" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblHistory_tblArticle" />
+        <AssociationConnector Association="ToutorialBlogModel.FK_tblHistory_tblUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
